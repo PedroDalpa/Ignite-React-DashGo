@@ -1,5 +1,5 @@
-import { Box, HStack } from "@chakra-ui/react";
-import { PaginationButton } from "./PaginationButton";
+import { Box, HStack } from '@chakra-ui/react';
+import { PaginationButton } from './PaginationButton';
 
 export function Pagination() {
   return (
