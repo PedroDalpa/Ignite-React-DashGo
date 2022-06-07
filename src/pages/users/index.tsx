@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Button, Checkbox, Flex, Heading, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
 import Link from 'next/link';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { useQuery } from 'react-query';
@@ -13,8 +13,6 @@ export default function UserList() {
 
     return data;
   });
-
-
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -45,6 +43,16 @@ export default function UserList() {
             </Link>
 
           </Flex>
+          {isLoading ? (
+            <Flex justify='center'>
+              <Spinner />
+            </Flex>
+          ) : error ? (
+            <Flex justify='center'>
+              <Text>Falha ao obter dados dos usuarios</Text>
+            </Flex>
+          ) : (
+            <>
               <Table colorScheme='whiteAlpha'>
                 <Thead>
                   <Tr>
@@ -96,6 +104,8 @@ export default function UserList() {
                 </Tbody>
               </Table>
               <Pagination />
+            </>
+          )}
 
         </Box>
       </Flex>
