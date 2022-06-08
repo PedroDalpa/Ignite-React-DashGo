@@ -1,4 +1,20 @@
-import { Box, Button, Checkbox, Flex, Heading, Icon, Spinner, Table, Tbody, Td, Text, Th, Thead, Tr, useBreakpointValue } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Flex,
+  Heading,
+  Icon,
+  Spinner,
+  Table,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr,
+  useBreakpointValue
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { useQuery } from 'react-query';
@@ -7,12 +23,16 @@ import { Pagination } from '../../components/Pagination/Index';
 import { Sidebar } from '../../components/Sidebar/Index';
 
 export default function UserList() {
-  const { data, isLoading, error } = useQuery('users', async () => {
+  const {
+    data,
+    isLoading,
+    error,
+    isFetching
+  } = useQuery('users', async () => {
     const response = await fetch('http://localhost:3000/api/users')
     const data = await response.json();
 
     const users = data.users.map(user => {
-
       return {
         id: user.id,
         name: user.name,
@@ -45,6 +65,10 @@ export default function UserList() {
 
             <Heading size='lg' fontWeight='normal'>
               Usuários
+
+              {isFetching && !isLoading && (
+                <Spinner size='sm' color='gray.500' ml='4' />
+              )}
             </Heading>
             <Link href='/users/create' passHref>
               <Button
