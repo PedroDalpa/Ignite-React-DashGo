@@ -1,0 +1,7 @@
+.container {
+  align-items: center;
+  display: grid;
+  grid: 1fr 1fr 1fr;
+  background: red;
+  padding-left: 100px;
+}
